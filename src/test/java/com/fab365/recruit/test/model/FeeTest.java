@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class FeeTest {
 
@@ -26,5 +28,20 @@ class FeeTest {
 			() -> assertThat(Fee.FEE_34900.getBasicFreeCapacity()).isEqualTo(3000),
 			() -> assertThat(Fee.FEE_69900.getBasicFreeCapacity()).isEqualTo(Integer.MAX_VALUE)
 		);
+	}
+
+	@DisplayName("주입받은 총사용액에 맞는 요금제를 반환 검증.")
+	@ParameterizedTest
+	@CsvSource(value = {"29900,29900","34900,34900","69900,69900"})
+	void recommendFeeTest(int amount, String amountName) {
+		assertThat(Fee.recommendFee(new TotalUserAmount(amount))).isEqualTo(amountName);
+	}
+
+	@DisplayName("추천요금제가 없는 경우 에러를 반환 검증.")
+	@Test
+	void validationRecommendFeeTest() {
+		assertThatThrownBy(
+			() -> Fee.recommendFee(new TotalUserAmount(-100))
+		).isInstanceOf(IllegalArgumentException.class);
 	}
 }
