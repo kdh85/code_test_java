@@ -1,5 +1,7 @@
 package com.fab365.recruit.test.model;
 
+import java.util.Objects;
+
 public class OverCapacity extends Payment {
 
 	public static final int MIN_OVER_CAPACITY_VALUE = 0;
@@ -32,5 +34,27 @@ public class OverCapacity extends Payment {
 		if (usageDataInMegabyte < MIN_OVER_CAPACITY_VALUE) {
 			throw new IllegalArgumentException(ERROR_MIN_OVER_CAPACITY_VALUE);
 		}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		OverCapacity that = (OverCapacity)o;
+		return overCapacity == that.overCapacity;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(overCapacity);
+	}
+
+	@Override
+	public String toString() {
+		return "OverCapacity{" +
+			   "overCapacity=" + overCapacity +
+			   '}';
 	}
 }
