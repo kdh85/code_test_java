@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -50,5 +51,11 @@ class OverCapacityTest {
 			() -> assertThatThrownBy(() -> overCapacity.overCapacityCalculate(overData, Fee.FEE_69900))
 				.isInstanceOf(IllegalArgumentException.class)
 		);
+	}
+
+	@DisplayName("초과사용량에 대한 금액계산을 반환 검증.")
+	@Test
+	void overAmountCalculateTest() {
+		assertThat(overCapacity.calculateAmountByCapacity(BasicOverCost.BASIC_TYPE)).isEqualTo(0);
 	}
 }
