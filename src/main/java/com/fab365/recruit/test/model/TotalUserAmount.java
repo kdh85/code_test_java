@@ -6,7 +6,7 @@ public class TotalUserAmount extends Payment {
 
 	private static final int DEFAULT_TOTAL_VALUE = 0;
 
-	private int totalAmount;
+	private final int totalAmount;
 
 	public TotalUserAmount() {
 		this(DEFAULT_TOTAL_VALUE);
@@ -20,31 +20,21 @@ public class TotalUserAmount extends Payment {
 		return totalAmount;
 	}
 
-	public TotalUserAmount compareTotalAmount(TotalUserAmount beforeTotal){
+	public TotalUserAmount compareTotalAmount(TotalUserAmount targetAmount) {
 
-		if(isSameToDefault(beforeTotal)){
-			return this;
-		}
-
-		if(isGreaterThan(beforeTotal)){
-			return beforeTotal;
+		if(isGreaterThan(targetAmount) || isSameToDefault()){
+			return targetAmount;
 		}
 
 		return this;
 	}
 
-	private boolean isSameToDefault(TotalUserAmount beforeTotal) {
-		return beforeTotal.totalAmount == DEFAULT_TOTAL_VALUE;
+	private boolean isSameToDefault() {
+		return this.totalAmount == DEFAULT_TOTAL_VALUE;
 	}
 
-	private boolean isGreaterThan(TotalUserAmount beforeTotal) {
-		return this.totalAmount > beforeTotal.totalAmount;
-	}
-
-	@Override
-	public TotalUserAmount totalAmountCalculate(int overAmount, Fee fee) {
-		this.totalAmount = fee.getAmount() + overAmount;
-		return this;
+	private boolean isGreaterThan(TotalUserAmount targetAmount) {
+		return this.totalAmount > targetAmount.totalAmount;
 	}
 
 	@Override
