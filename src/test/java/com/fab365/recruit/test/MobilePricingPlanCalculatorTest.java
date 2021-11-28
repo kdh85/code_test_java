@@ -20,6 +20,8 @@ class MobilePricingPlanCalculatorTest {
 	void bestRecommendFeeTest() {
 		// 1메가
 		assertThat(calculator.minimumPricePlan(1)).isEqualTo("29900");
+		// 4000메가
+		assertThat(calculator.minimumPricePlan(4000)).isEqualTo("34900");
 		// 10기가
 		assertThat(calculator.minimumPricePlan(10 * 1000)).isEqualTo("69900");
 	}
