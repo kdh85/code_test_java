@@ -9,7 +9,7 @@ public abstract class Payment implements PricingPlan {
 	private static final int DEFAULT_VALUE = 0;
 
 	@Override
-	public TotalUserAmount totalAmountCalculate(Fee fee) {
+	public int totalAmountCalculate(Fee fee) {
 		throw new IllegalArgumentException(ERROR_TOTAL_CALCULATE);
 	}
 
