@@ -2,8 +2,8 @@ package com.fab365.recruit.test.model;
 
 public class OverCapacity extends Payment {
 
-	private static final int MIN_OVER_CAPACITY_VALUE = 0;
-	private static final String ERROR_MIN_OVER_CAPACITY_VALUE = String.format("초과 사용량은 %d 이상부터 가능합니다.",
+	public static final int MIN_OVER_CAPACITY_VALUE = 0;
+	public static final String ERROR_MIN_OVER_CAPACITY_VALUE = String.format("초과 사용량은 %d 이상부터 가능합니다.",
 		MIN_OVER_CAPACITY_VALUE);
 
 	private int overCapacity;
