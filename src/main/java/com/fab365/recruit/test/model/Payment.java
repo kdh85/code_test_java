@@ -6,7 +6,7 @@ public abstract class Payment implements PricingPlan {
 
 	private static final String ERROR_TOTAL_CALCULATE = "총 사용량을 계산을 할 수 없습니다.";
 	private static final String ERROR_OVER_CAPACITY = "초과 사용량 계산을 할 수 없습니다.";
-	private static final String ERROR_OVER_AMOUNT = "초과 요금 계산을 할 수 없습니다.";
+	private static final int DEFAULT_VALUE = 0;
 
 	@Override
 	public TotalUserAmount totalAmountCalculate(Fee fee) {
@@ -14,13 +14,12 @@ public abstract class Payment implements PricingPlan {
 	}
 
 	@Override
-	public void overCapacityCalculate(int usageDataInMegabyte, Fee fee) {
-		throw new IllegalArgumentException(ERROR_OVER_CAPACITY);
+	public int calculateAmountByCapacity(BasicOverCost basicOverCost) {
+		return DEFAULT_VALUE;
 	}
 
 	@Override
-	public OverAmount overAmountCalculate(BasicOverCost basicOverCost) {
-		throw new IllegalArgumentException(ERROR_OVER_AMOUNT);
+	public void overCapacityCalculate(int usageDataInMegabyte, Fee fee) {
+		throw new IllegalArgumentException(ERROR_OVER_CAPACITY);
 	}
-
 }
