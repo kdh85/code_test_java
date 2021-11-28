@@ -1,19 +1,12 @@
 package com.fab365.recruit.test.model;
 
-import java.util.List;
+import com.fab365.recruit.test.PricingPlan;
 
-import com.fab365.recruit.test.PlanService;
-
-public abstract class Payment implements PlanService {
+public abstract class Payment implements PricingPlan {
 
 	@Override
-	public String recommendFee(int usageDataInMegabyte) {
-		return null;
-	}
-
-	@Override
-	public int totalAmountCalculate(int overAmount) {
-		return 0;
+	public TotalUserAmount totalAmountCalculate(int overAmount, Fee fee) {
+		throw new IllegalArgumentException("총 사용량을 계산을 할 수 없습니다.");
 	}
 
 	@Override
@@ -22,12 +15,8 @@ public abstract class Payment implements PlanService {
 	}
 
 	@Override
-	public OverAmount overAmountCalculate(int overCapacity) {
+	public OverAmount overAmountCalculate(int overCapacity, BasicOverCost basicOverCost) {
 		throw new IllegalArgumentException("초과 요금 계산을 할 수 없습니다.");
 	}
 
-	@Override
-	public List<Fee> generateAllFee() {
-		return Fee.asList();
-	}
 }
