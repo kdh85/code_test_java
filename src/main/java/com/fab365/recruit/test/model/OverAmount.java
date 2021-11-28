@@ -1,14 +1,13 @@
 package com.fab365.recruit.test.model;
 
-import static com.fab365.recruit.test.model.OverCapacity.*;
-
 import java.util.Objects;
 
 public class OverAmount extends Payment {
 
-	private int overAmount;
+	private final int overAmount;
 
-	public OverAmount() {
+	public OverAmount(int overAmount) {
+		this.overAmount = overAmount;
 	}
 
 	public int getOverAmount() {
@@ -16,16 +15,8 @@ public class OverAmount extends Payment {
 	}
 
 	@Override
-	public OverAmount overAmountCalculate(int overCapacity, BasicOverCost basicOverCost) {
-		validationCapacity(overCapacity);
-		this.overAmount = basicOverCost.calculateAmount(overCapacity);
-		return this;
-	}
-
-	private void validationCapacity(int overCapacity) {
-		if(overCapacity < MIN_OVER_CAPACITY_VALUE) {
-			throw new IllegalArgumentException(ERROR_MIN_OVER_CAPACITY_VALUE);
-		}
+	public int totalAmountCalculate(Fee fee) {
+		return fee.getAmount() + overAmount;
 	}
 
 	@Override

@@ -1,35 +1,32 @@
 package com.fab365.recruit.test.model;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class OverAmountTest {
 
-	private OverAmount overAmount;
-
-	@BeforeEach
-	void setUp() {
-		overAmount = new OverAmount();
-	}
-
 	@DisplayName("초과사용 용량에 대한 초과요금 반환 검증.")
 	@ParameterizedTest
-	@CsvSource(value = {"100,2000", "0,0", "2500, 50000"})
-	void createOverAmountTest(int overCapacity, int overCost) {
-		assertThat(overAmount.overAmountCalculate(overCapacity, BasicOverCost.BASIC_TYPE).getOverAmount()).isEqualTo(
-			overCost);
+	@ValueSource(ints = {0, 100, 2500})
+	void createOverAmountTest(int overCost) {
+		assertThat(new OverAmount(overCost).getOverAmount()).isEqualTo(overCost);
 	}
 
-	@DisplayName("입력되는 초과사용량이 0 미만인 경우 에러반환 검증.")
-	@Test
-	void validationAmountTest() {
-		assertThatThrownBy(
-			() -> overAmount.overAmountCalculate(-1, BasicOverCost.BASIC_TYPE)
-		).isInstanceOf(IllegalArgumentException.class);
+	@DisplayName("초과사용시 해당 요금제 기준 총 요금액을 반환 검증.")
+	@ParameterizedTest
+	@CsvSource(value = {"100, 30000, 35000, 70000", "10000, 39900, 44900, 79900"})
+	void calculateTotalAmountTest(int overCost, int total29900, int total34900, int total69900) {
+		OverAmount overAmount = new OverAmount(overCost);
+
+		assertAll(
+			() -> assertThat(overAmount.totalAmountCalculate(Fee.FEE_29900)).isEqualTo(total29900),
+			() -> assertThat(overAmount.totalAmountCalculate(Fee.FEE_34900)).isEqualTo(total34900),
+			() -> assertThat(overAmount.totalAmountCalculate(Fee.FEE_69900)).isEqualTo(total69900)
+		);
 	}
 }
