@@ -1,12 +1,9 @@
 package com.fab365.recruit.test.model;
 
-import java.util.Arrays;
-import java.util.List;
-
 public enum Fee {
-	FEE_29900(29900,300),
-	FEE_34900(34900,3000),
-	FEE_69900(69900,Integer.MAX_VALUE);
+	FEE_29900(29900, 300),
+	FEE_34900(34900, 3000),
+	FEE_69900(69900, Integer.MAX_VALUE);
 
 	private final int amount;
 
@@ -23,9 +20,5 @@ public enum Fee {
 
 	public int getBasicFreeCapacity() {
 		return basicFreeCapacity;
-	}
-
-	public static List<Fee> asList() {
-		return Arrays.asList(values());
 	}
 }
