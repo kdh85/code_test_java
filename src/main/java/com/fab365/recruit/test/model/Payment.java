@@ -1,6 +1,6 @@
 package com.fab365.recruit.test.model;
 
-import com.fab365.recruit.test.PricingPlan;
+import com.fab365.recruit.test.plan.PricingPlan;
 
 public abstract class Payment implements PricingPlan {
 
