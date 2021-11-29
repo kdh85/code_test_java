@@ -14,7 +14,7 @@ public class OverCapacity extends Payment {
 		this.overCapacity = overCapacity;
 	}
 
-	public static OverCapacity createCapacity(){
+	public static OverCapacity createCapacity() {
 		return new OverCapacity(MIN_OVER_CAPACITY_VALUE);
 	}
 

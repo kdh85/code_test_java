@@ -12,11 +12,11 @@ public class TotalUserAmount extends Payment {
 		this.totalAmount = totalAmount;
 	}
 
-	public static TotalUserAmount createDefaultTotal(){
+	public static TotalUserAmount createDefaultTotal() {
 		return new TotalUserAmount(DEFAULT_TOTAL_VALUE);
 	}
 
-	public static TotalUserAmount from(int totalAmount){
+	public static TotalUserAmount from(int totalAmount) {
 		return new TotalUserAmount(totalAmount);
 	}
 
@@ -26,7 +26,7 @@ public class TotalUserAmount extends Payment {
 
 	public TotalUserAmount compareTotalAmount(TotalUserAmount targetAmount) {
 
-		if(isGreaterThan(targetAmount) || isSameToDefault()){
+		if (isGreaterThan(targetAmount) || isSameToDefault()) {
 			return targetAmount;
 		}
 

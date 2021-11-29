@@ -10,7 +10,7 @@ public class OverAmount extends Payment {
 		this.overAmount = overAmount;
 	}
 
-	public static OverAmount from(int overAmount){
+	public static OverAmount from(int overAmount) {
 		return new OverAmount(overAmount);
 	}
 

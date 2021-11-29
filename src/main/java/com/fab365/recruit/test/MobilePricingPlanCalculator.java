@@ -41,7 +41,8 @@ public final class MobilePricingPlanCalculator {
 		return Fee.recommendFee(minimumTotal);
 	}
 
-	private TotalUserAmount compareEachTotalValue(Integer usageDataInMegabyte, TotalUserAmount minimumTotal, Fee amountType) {
+	private TotalUserAmount compareEachTotalValue(Integer usageDataInMegabyte, TotalUserAmount minimumTotal,
+												  Fee amountType) {
 		return minimumTotal.compareTotalAmount(
 			OverAmount.from(getOverAmountValue(getOverCapacityValue(usageDataInMegabyte, amountType)))
 				.totalAmountCalculate(amountType));
