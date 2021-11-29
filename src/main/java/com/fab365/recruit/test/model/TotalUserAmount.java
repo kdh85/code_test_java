@@ -8,12 +8,16 @@ public class TotalUserAmount extends Payment {
 
 	private final int totalAmount;
 
-	public TotalUserAmount() {
-		this(DEFAULT_TOTAL_VALUE);
+	private TotalUserAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
-	public TotalUserAmount(int totalAmount) {
-		this.totalAmount = totalAmount;
+	public static TotalUserAmount createDefaultTotal(){
+		return new TotalUserAmount(DEFAULT_TOTAL_VALUE);
+	}
+
+	public static TotalUserAmount from(int totalAmount){
+		return new TotalUserAmount(totalAmount);
 	}
 
 	public int getTotalAmount() {

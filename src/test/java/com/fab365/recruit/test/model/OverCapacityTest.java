@@ -16,7 +16,7 @@ class OverCapacityTest {
 
 	@BeforeEach
 	void setUp() {
-		overCapacity = new OverCapacity();
+		overCapacity = OverCapacity.createCapacity();
 	}
 
 	@DisplayName("사용량을 입력받아 요금의 기본 제공 데이터량을 초과한 값을 반환하는 검증.")

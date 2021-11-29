@@ -32,22 +32,26 @@ public final class MobilePricingPlanCalculator {
 	 */
 	public String minimumPricePlan(Integer usageDataInMegabyte) {
 
-		TotalUserAmount minimumTotal = new TotalUserAmount();
-		OverCapacity overCapacity = new OverCapacity();
+		TotalUserAmount minimumTotal = TotalUserAmount.createDefaultTotal();
 
 		for (Fee amountType : Fee.values()) {
-			overCapacity.overCapacityCalculate(usageDataInMegabyte, amountType);
 
-			OverAmount overAmount = new OverAmount(overAmountValue(overCapacity));
-
-			TotalUserAmount totalUserAmount = new TotalUserAmount(overAmount.totalAmountCalculate(amountType));
-
-			minimumTotal = minimumTotal.compareTotalAmount(totalUserAmount);
+			minimumTotal = compareEachTotalValue(usageDataInMegabyte, minimumTotal, amountType);
 		}
 		return Fee.recommendFee(minimumTotal);
 	}
 
-	private int overAmountValue(OverCapacity overCapacity) {
+	private TotalUserAmount compareEachTotalValue(Integer usageDataInMegabyte, TotalUserAmount minimumTotal, Fee amountType) {
+		return minimumTotal.compareTotalAmount(
+			OverAmount.from(getOverAmountValue(getOverCapacityValue(usageDataInMegabyte, amountType)))
+				.totalAmountCalculate(amountType));
+	}
+
+	private OverCapacity getOverCapacityValue(Integer usageDataInMegabyte, Fee amountType) {
+		return OverCapacity.createCapacity().overCapacityCalculate(usageDataInMegabyte, amountType);
+	}
+
+	private int getOverAmountValue(OverCapacity overCapacity) {
 		return overCapacity.calculateAmountByCapacity(BasicOverCost.BASIC_TYPE);
 	}
 }

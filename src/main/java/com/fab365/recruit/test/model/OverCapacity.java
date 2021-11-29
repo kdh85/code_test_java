@@ -10,15 +10,19 @@ public class OverCapacity extends Payment {
 
 	private int overCapacity;
 
-	public OverCapacity() {
+	private OverCapacity(int overCapacity) {
+		this.overCapacity = overCapacity;
+	}
+
+	public static OverCapacity createCapacity(){
+		return new OverCapacity(MIN_OVER_CAPACITY_VALUE);
 	}
 
 	public int getOverCapacity() {
 		return overCapacity;
 	}
 
-	@Override
-	public void overCapacityCalculate(int usageDataInMegabyte, Fee fee) {
+	public OverCapacity overCapacityCalculate(int usageDataInMegabyte, Fee fee) {
 
 		validationUseData(usageDataInMegabyte);
 
@@ -27,6 +31,7 @@ public class OverCapacity extends Payment {
 		if (this.overCapacity < MIN_OVER_CAPACITY_VALUE) {
 			this.overCapacity = MIN_OVER_CAPACITY_VALUE;
 		}
+		return this;
 	}
 
 	private void validationUseData(int usageDataInMegabyte) {

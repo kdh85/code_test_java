@@ -6,8 +6,12 @@ public class OverAmount extends Payment {
 
 	private final int overAmount;
 
-	public OverAmount(int overAmount) {
+	private OverAmount(int overAmount) {
 		this.overAmount = overAmount;
+	}
+
+	public static OverAmount from(int overAmount){
+		return new OverAmount(overAmount);
 	}
 
 	public int getOverAmount() {
@@ -15,8 +19,8 @@ public class OverAmount extends Payment {
 	}
 
 	@Override
-	public int totalAmountCalculate(Fee fee) {
-		return fee.getAmount() + overAmount;
+	public TotalUserAmount totalAmountCalculate(Fee fee) {
+		return TotalUserAmount.from(fee.getAmount() + overAmount);
 	}
 
 	@Override

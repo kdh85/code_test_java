@@ -11,18 +11,19 @@ class TotalUserAmountTest {
 	@DisplayName("초과비용과 요금제를 주입받아 해당 요금제 기준 총 요금액을 반환 검증.")
 	@Test
 	void createTotalAmountTest() {
-		assertThat(new TotalUserAmount(30000).getTotalAmount()).isEqualTo(30000);
+		assertThat(TotalUserAmount.from(30000).getTotalAmount()).isEqualTo(30000);
 	}
 
 	@DisplayName("발생한 총 요금액중 가장 작은 것을 반환하는지 검증.")
 	@Test
 	void compareTest() {
-		TotalUserAmount testTotal = new TotalUserAmount(2000);
 
 		assertAll(
-			() -> assertThat(testTotal.compareTotalAmount(new TotalUserAmount(1000))).isEqualTo(
-				new TotalUserAmount(1000)),
-			() -> assertThat(testTotal.compareTotalAmount(new TotalUserAmount(100000))).isEqualTo(testTotal)
+			() -> assertThat(TotalUserAmount.from(2000).compareTotalAmount(TotalUserAmount.from(1000))).isEqualTo(
+				TotalUserAmount.from(1000)),
+
+			() -> assertThat(TotalUserAmount.from(2000).compareTotalAmount(TotalUserAmount.from(100000))).isEqualTo(
+				TotalUserAmount.from(2000))
 		);
 	}
 }

@@ -9,7 +9,7 @@ public abstract class Payment implements PricingPlan {
 	private static final int DEFAULT_VALUE = 0;
 
 	@Override
-	public int totalAmountCalculate(Fee fee) {
+	public TotalUserAmount totalAmountCalculate(Fee fee) {
 		throw new IllegalArgumentException(ERROR_TOTAL_CALCULATE);
 	}
 
@@ -19,7 +19,7 @@ public abstract class Payment implements PricingPlan {
 	}
 
 	@Override
-	public void overCapacityCalculate(int usageDataInMegabyte, Fee fee) {
+	public OverCapacity overCapacityCalculate(int usageDataInMegabyte, Fee fee) {
 		throw new IllegalArgumentException(ERROR_OVER_CAPACITY);
 	}
 }
