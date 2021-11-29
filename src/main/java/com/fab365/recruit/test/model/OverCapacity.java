@@ -28,10 +28,14 @@ public class OverCapacity extends Payment {
 
 		this.overCapacity = usageDataInMegabyte - fee.getBasicFreeCapacity();
 
-		if (this.overCapacity < MIN_OVER_CAPACITY_VALUE) {
+		if (isLessThanMinimumCapacity()) {
 			this.overCapacity = MIN_OVER_CAPACITY_VALUE;
 		}
 		return this;
+	}
+
+	private boolean isLessThanMinimumCapacity() {
+		return this.overCapacity < MIN_OVER_CAPACITY_VALUE;
 	}
 
 	private void validationUseData(int usageDataInMegabyte) {
