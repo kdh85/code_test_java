@@ -1,11 +1,5 @@
 package com.fab365.recruit.test;
 
-import com.fab365.recruit.test.model.BasicOverCost;
-import com.fab365.recruit.test.model.Fee;
-import com.fab365.recruit.test.model.OverAmount;
-import com.fab365.recruit.test.model.OverCapacity;
-import com.fab365.recruit.test.model.TotalUserAmount;
-
 /**
  * A는 카드 청구서를 살펴보다가 휴대폰 요금이 20만원이나 나와 깜짝 놀랐습니다.
  * 내역을 살펴보니, 데이터를 너무 많이 쓴게 화근이었습니다.
@@ -31,28 +25,6 @@ public final class MobilePricingPlanCalculator {
 	 * @return 최저 요금의 요금제 이름
 	 */
 	public String minimumPricePlan(Integer usageDataInMegabyte) {
-
-		TotalUserAmount minimumTotal = TotalUserAmount.createDefaultTotal();
-
-		for (Fee amountType : Fee.values()) {
-
-			minimumTotal = compareEachTotalValue(usageDataInMegabyte, minimumTotal, amountType);
-		}
-		return Fee.recommendFee(minimumTotal);
-	}
-
-	private TotalUserAmount compareEachTotalValue(Integer usageDataInMegabyte, TotalUserAmount minimumTotal,
-												  Fee amountType) {
-		return minimumTotal.compareTotalAmount(
-			OverAmount.from(getOverAmountValue(getOverCapacityValue(usageDataInMegabyte, amountType)))
-				.totalAmountCalculate(amountType));
-	}
-
-	private OverCapacity getOverCapacityValue(Integer usageDataInMegabyte, Fee amountType) {
-		return OverCapacity.createCapacity().overCapacityCalculate(usageDataInMegabyte, amountType);
-	}
-
-	private int getOverAmountValue(OverCapacity overCapacity) {
-		return overCapacity.calculateAmountByCapacity(BasicOverCost.BASIC_TYPE);
+		return null;
 	}
 }
