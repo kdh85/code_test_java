@@ -4,6 +4,8 @@ import com.fab365.recruit.test.model.Capacity;
 
 public abstract class UnlimitedFee extends FeeType {
 
+  private static final String ERROR_NOT_NEED_USE_CAPACITY = "무제한 요금은 초과사용량을 계산하지 않습니다.";
+
   @Override
   public boolean isUnLimitFee() {
     return true;
@@ -16,6 +18,6 @@ public abstract class UnlimitedFee extends FeeType {
 
   @Override
   public Capacity calculateTotalCapacity(final int spendCapacity) {
-    throw new RuntimeException("무제한 요금은 초과사용량을 계산하지 않습니다.");
+    throw new RuntimeException(ERROR_NOT_NEED_USE_CAPACITY);
   }
 }
